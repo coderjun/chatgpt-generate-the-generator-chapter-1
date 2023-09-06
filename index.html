@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chord Progression Generator</title>
     <style>
-        /* Add your CSS styles here */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -20,7 +19,6 @@
         <option value="pop">Pop</option>
         <option value="rock">Rock</option>
         <option value="jazz">Jazz</option>
-        <!-- Add more genres as needed -->
     </select>
     <button onclick="getChordProgression()">Generate Chord Progression</button>
 
@@ -29,10 +27,24 @@
     </div>
 
     <script>
-        function getChordProgression() {
+        async function getChordProgression() {
             const genre = document.getElementById('genre').value;
-            // Make an API call to ChatGPT with the selected genre
-            // Display the result in the 'result' div
+            const promptText = `Generate a chord progression for a ${genre} song with a verse, bridge, and chorus.`;
+
+            const response = await fetch('https://api.openai.com/v1/engines/davinci/completions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer YOUR_API_KEY', // Replace 'YOUR_API_KEY' with your actual API key
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    prompt: promptText,
+                    max_tokens: 150
+                })
+            });
+
+            const data = await response.json();
+            document.getElementById('result').innerText = data.choices[0].text.trim();
         }
     </script>
 </body>
