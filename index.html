@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chord Progression Generator</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chord Progression Generator</h1>
+    <label for="genre">Select Genre:</label>
+    <select id="genre">
+        <option value="pop">Pop</option>
+        <option value="rock">Rock</option>
+        <option value="jazz">Jazz</option>
+        <!-- Add more genres as needed -->
+    </select>
+    <button onclick="getChordProgression()">Generate Chord Progression</button>
+
+    <div id="result">
+        <!-- The chord progression will be displayed here -->
+    </div>
+
+    <script>
+        function getChordProgression() {
+            const genre = document.getElementById('genre').value;
+            // Make an API call to ChatGPT with the selected genre
+            // Display the result in the 'result' div
+        }
+    </script>
+</body>
+</html>
