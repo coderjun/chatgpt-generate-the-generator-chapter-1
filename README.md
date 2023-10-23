@@ -135,3 +135,91 @@ Here's the updated code:
 - The response from the API is parsed as JSON, and the result is displayed in the `result` div.
 
 If you plan to deploy this, make sure to set up a server-side function to handle the API call to OpenAI to keep your API key secure.
+
+# Third Volley
+
+**Prompt:** create the server-side function and necessary scaffolding for me
+
+**Response:** Certainly! For simplicity, I'll use Node.js with the Express framework to create a server-side function. This server will expose an endpoint that the client-side can call, and this server-side function will then make the request to OpenAI's API.
+
+Here's a step-by-step guide:
+
+1. **Setup**:
+   - Make sure you have [Node.js](https://nodejs.org/) installed.
+   - Create a new directory for your project.
+   - Navigate to the directory in your terminal and run `npm init -y` to initialize a new Node.js project.
+   - Install the necessary packages: `npm install express axios`
+
+2. **Server Code** (`server.js`):
+
+```javascript
+const express = require('express');
+const axios = require('axios');
+const app = express();
+const PORT = 3000;
+
+// Middleware to parse JSON requests
+app.use(express.json());
+
+app.post('/generate-chords', async (req, res) => {
+    const genre = req.body.genre;
+    const promptText = `Generate a chord progression for a ${genre} song with a verse, bridge, and chorus.`;
+
+    try {
+        const response = await axios.post('https://api.openai.com/v1/engines/davinci/completions', {
+            prompt: promptText,
+            max_tokens: 150
+        }, {
+            headers: {
+                'Authorization': 'Bearer YOUR_API_KEY', // Replace with your OpenAI API key
+                'Content-Type': 'application/json'
+            }
+        });
+
+        res.json(response.data.choices[0].text.trim());
+    } catch (error) {
+        res.status(500).send('Error generating chord progression');
+    }
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
+```
+
+3. **Client-side Update**:
+
+Update the client-side `getChordProgression` function to call your server endpoint instead of OpenAI directly:
+
+```javascript
+async function getChordProgression() {
+    const genre = document.getElementById('genre').value;
+
+    try {
+        const response = await fetch('/generate-chords', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ genre: genre })
+        });
+
+        const data = await response.text();
+        document.getElementById('result').innerText = data;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+```
+
+4. **Run the Server**:
+
+In your terminal, navigate to your project directory and run:
+
+```bash
+node server.js
+```
+
+Your server will start, and you can access your webpage at `http://localhost:3000`. When you select a genre and click the button, it will call the server-side function, which will then call the OpenAI API and return the chord progression.
+
+Remember to replace `'YOUR_API_KEY'` in the server code with your actual OpenAI API key.
