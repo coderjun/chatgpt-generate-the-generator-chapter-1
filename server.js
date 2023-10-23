@@ -1,10 +1,24 @@
 const express = require('express');
 const axios = require('axios');
 const app = express();
+
+// START - https://www.digitalocean.com/community/tutorials/use-expressjs-to-deliver-html-files
+const path = require('path');
+// END
+
 const PORT = 3000;
+
+
 
 // Middleware to parse JSON requests
 app.use(express.json());
+
+// START - https://www.digitalocean.com/community/tutorials/use-expressjs-to-deliver-html-files
+// sendFile will go here
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname, '/index.html'));
+  });
+// END
 
 app.post('/generate-chords', async (req, res) => {
     const genre = req.body.genre;

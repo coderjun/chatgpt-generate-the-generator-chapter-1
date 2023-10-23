@@ -223,3 +223,8 @@ node server.js
 Your server will start, and you can access your webpage at `http://localhost:3000`. When you select a genre and click the button, it will call the server-side function, which will then call the OpenAI API and return the chord progression.
 
 Remember to replace `'YOUR_API_KEY'` in the server code with your actual OpenAI API key.
+
+# Third Volley (Correction)
+
+**Note:** Maybe it was my prompt, maybe it was chatgpt but the piece used by node express to serve up index.html was missing. Grabbed a snippet from Digital Ocean to make it happen: https://www.digitalocean.com/community/tutorials/use-expressjs-to-deliver-html-files
+
