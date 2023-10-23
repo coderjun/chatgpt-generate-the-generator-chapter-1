@@ -228,3 +228,7 @@ Remember to replace `'YOUR_API_KEY'` in the server code with your actual OpenAI 
 
 **Note:** Maybe it was my prompt, maybe it was chatgpt but the piece used by node express to serve up index.html was missing. Grabbed a snippet from Digital Ocean to make it happen: https://www.digitalocean.com/community/tutorials/use-expressjs-to-deliver-html-files
 
+# Third Volley (Debugging)
+
+**Note:** I was receiving failed requests. Added some debugging code to get to the bottom of it with a breakpoint. (Commented out currently) Turns out you need to purchase credits to use the API. It's not included with Apple's iOS ChatGPT Plus subscription. After debugging got responses to come in successfully...even though we'll need some decent prompt engineering to get the type of result we're looking for. 
+

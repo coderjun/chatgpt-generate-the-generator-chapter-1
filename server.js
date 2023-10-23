@@ -38,6 +38,9 @@ app.post('/generate-chords', async (req, res) => {
         res.json(response.data.choices[0].text.trim());
     } catch (error) {
         res.status(500).send('Error generating chord progression');
+        // START - Response Debugging
+        // res.status(500).send('Error generating chord progression: ' + error.response.data.error.message);
+        // END 
     }
 });
 
