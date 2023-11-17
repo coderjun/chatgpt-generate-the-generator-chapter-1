@@ -230,9 +230,25 @@ Remember to replace `'YOUR_API_KEY'` in the server code with your actual OpenAI 
 
 # Third Volley (Debugging)
 
-**Note:** I was receiving failed requests. Added some debugging code to get to the bottom of it with a breakpoint. (Commented out currently) Turns out you need to purchase credits to use the API. It's not included with Apple's iOS ChatGPT Plus subscription. After debugging got responses to come in successfully...even though we'll need some decent prompt engineering to get the type of result we're looking for. 
+**Note:** I was receiving failed requests. Added some debugging code to get to the bottom of it with a breakpoint. (Commented out currently) Turns out you need to purchase credits to use the API. It's not included with Apple's iOS ChatGPT Plus subscription. After debugging got responses to come in successfully...even though we'll need some decent prompt engineering to get the type of result we're looking for. See these horrible results...
+
+![First Pop Chord Progression Response - Garbage Results](readme-images/third-volley-debugging-pop-1.png)
+![Second Pop Chord Progression Response - Garbage Results](readme-images/third-volley-debugging-pop-2.png)
+![First Rock Chord Progression Response - Garbage Results](readme-images/third-volley-debugging-rock-1.png)
+![Second Rock Chord Progression Response - Garbage Results](readme-images/third-volley-debugging-rock-2.png)
+![First Jazz Chord Progression Response - Garbage Results](readme-images/third-volley-debugging-jazz-1.png)
+![Second Jazz Chord Progression Response - Garbage Results](readme-images/third-volley-debugging-jazz-2.png)
 
 
 # Third Volley (Switching the API Endpoint and Tweaking Output)
 
-**Note:** So the prompt itself wasn't bad. ChatGPT had just advised me to use either a legacy (https://help.openai.com/en/articles/6283125-what-happened-to-engines) or the wrong API endpoint. I figured this out by going to the OpenAPI Platform Playground: https://platform.openai.com/playground. The nice thing about Playgroud is that it gave me a pretty nice snippet so that I could determine how to tweak the request payload. After that all I needed was a little "\n" handling in the display and off the to the races!
+**Note:** So the prompt itself wasn't bad. ChatGPT had just advised me to use either a legacy (https://help.openai.com/en/articles/6283125-what-happened-to-engines) or the wrong API endpoint. I figured this out by going to the OpenAPI Platform Playground: https://platform.openai.com/playground.
+
+![Testing in the OpenAPI Platform Playground](readme-images/third-volley-good-openai-platform-playground.png)
+
+The nice thing about Playgroud is that it gave me a pretty nice snippet so that I could determine how to tweak the request payload. After that all I needed was a little "\n" handling in the display and off the to the races!
+
+![Pop Chord Progression Response - Good Results](readme-images/third-volley-good-pop.png)
+![Rock Chord Progression Response - Good Results](readme-images/third-volley-good-rock.png)
+![Jazz Chord Progression Response - Good Results](readme-images/third-volley-good-jazz.png)
+![Jazz Chord Progression Response - Good Results 2](readme-images/third-volley-good-jazz-2.png)
