@@ -25,9 +25,21 @@ app.post('/generate-chords', async (req, res) => {
     const promptText = `Generate a chord progression for a ${genre} song with a verse, bridge, and chorus.`;
 
     try {
-        const response = await axios.post('https://api.openai.com/v1/engines/davinci/completions', {
-            prompt: promptText,
-            max_tokens: 150
+        // https://help.openai.com/en/articles/6283125-what-happened-to-engines -- had to change it from https://api.openai.com/v1/engines/davinci/completions
+        // Also, went to https://platform.openai.com/playground?lang=node.js&mode=chat&model=gpt-3.5-turbo and reviewed the code snippet to figure out how to form the object.
+        const response = await axios.post('https://api.openai.com/v1/chat/completions', {
+            model: "gpt-3.5-turbo",
+            messages: [
+              {
+                "role": "system",
+                "content": promptText
+              }
+            ],
+            temperature: 1,
+            max_tokens: 256,
+            top_p: 1,
+            frequency_penalty: 0,
+            presence_penalty: 0
         }, {
             headers: {
                 'Authorization': 'Bearer YOUR_API_KEY', // Replace with your OpenAI API key
@@ -35,7 +47,7 @@ app.post('/generate-chords', async (req, res) => {
             }
         });
 
-        res.json(response.data.choices[0].text.trim());
+        res.json(response.data.choices[0].message.content.trim());
     } catch (error) {
         res.status(500).send('Error generating chord progression');
         // START - Response Debugging

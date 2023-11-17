@@ -25,7 +25,7 @@
     <div id="result">
         <!-- The chord progression will be displayed here -->
     </div>
-
+ 
     <script>
         async function getChordProgression() {
             const genre = document.getElementById('genre').value;
@@ -40,7 +40,8 @@
                 });
 
                 const data = await response.text();
-                document.getElementById('result').innerText = data;
+                // https://www.geeksforgeeks.org/how-to-handle-newlines-in-json/
+                document.getElementById('result').innerText = JSON.parse(data);
             } catch (error) {
                 console.error('Error:', error);
             }
